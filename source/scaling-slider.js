@@ -26,14 +26,14 @@ ScalingSlider = new JS.Class('ScalingSlider', {
             areaWidth   = this._area.getWidth(),
             ratio       = portWidth / areaWidth,
             handleWidth = Math.ceil(ratio * portWidth),
-            offsetLeft  = this._handle.node.offsetLeft,
+            offsetLeft  = Math.round((handleWidth / this._handle.getWidth()) * this._handle.node.offsetLeft),
             offsetRight = portWidth - handleWidth - offsetLeft;
         
-        this._slider.setXConstraint(offsetLeft, portWidth - handleWidth - offsetLeft);
+        this._slider.setXConstraint(offsetLeft, offsetRight);
         
-        // Should set left position, based on position of area relative to viewport
         this._handle.setStyle({
-            width: handleWidth + 'px'
+            width: handleWidth + 'px',
+            left:  offsetLeft + 'px'
         });
     }
 });
