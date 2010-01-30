@@ -25,15 +25,15 @@ ScalingSlider = new JS.Class('ScalingSlider', {
         var portWidth   = Ojay.getViewportSize().width,
             areaWidth   = this._area.getWidth(),
             ratio       = portWidth / areaWidth,
-            handleWidth = ratio * portWidth;
+            handleWidth = Math.ceil(ratio * portWidth),
+            offsetLeft  = this._handle.node.offsetLeft,
+            offsetRight = portWidth - handleWidth - offsetLeft;
         
-        // Bugs here!
-        // Left constraint shouldn't be zero
-        // Right constraint needs recalculating to take account of current position!
-        this._slider.setXConstraint(0, portWidth - handleWidth);
+        this._slider.setXConstraint(offsetLeft, portWidth - handleWidth - offsetLeft);
         
+        // Should set left position, based on position of area relative to viewport
         this._handle.setStyle({
-            width: handleWidth + 'px';
+            width: handleWidth + 'px'
         });
     }
 });
