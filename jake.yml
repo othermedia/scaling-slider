@@ -1,0 +1,25 @@
+---
+source_directory:     source
+build_directory:      build
+layout:               together
+
+builds:
+  src:
+    packer:           false
+    suffix:           false
+  min:
+    shrink_vars:      true
+    private:          false
+
+packages:
+  scaling-slider:
+    files:
+      - scaling-slider
+    meta:
+      requires:
+        - JS.Class
+        - Ojay
+        - Ojay.HTML
+        - YAHOO.util.DD
+      provides:
+        - ScalingSlider
