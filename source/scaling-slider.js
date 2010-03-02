@@ -15,6 +15,7 @@ ScalingSlider = new JS.Class('ScalingSlider', {
         this._slider.setYConstraint(0, 0);
         this._slider.onDrag = this.drag.bind(this);
         Ojay(window).on('resize', this.rescale, this);
+        this._backing.on('click', this.click, this);
         
         this._area.insert(this._container, 'before')
         ._(this._container)
@@ -33,25 +34,40 @@ ScalingSlider = new JS.Class('ScalingSlider', {
         this._slider.setXConstraint(offsetLeft, offsetRight);
         
         this._handle.setStyle({
-            width: this.handleWidth() + 'px',
-            left:  offsetLeft + 'px'
+            position: 'relative',
+            width:    this.handleWidth() + 'px',
+            left:     offsetLeft + 'px'
         });
     },
     
-    reposition: function(centre) {
+    reposition: function(x) {
+        var offset = (x / this.ratio()).ceil();
+        
         this._area.animate({
             left: {
-                to: -centre
+                to: -offset
             }
         }, this._animTime);
     },
     
-    drag: function(evnt) {
-        var offsetLeft  = this._handle.node.offsetLeft,
-            handleWidth = this.handleWidth(),
-            centre      = offsetLeft + (handleWidth / 2);
+    click: function(target, evnt) {
+        if (evnt.getTarget().node !== this._backing.node) return;
         
-        this.reposition((offsetLeft / this.ratio()).ceil());
+        var centre = evnt.clientX,
+            offset = centre - (this.handleWidth() / 2).ceil();
+        
+        if (offset + this.handleWidth() > this._containerWidth) {
+            offset = this._containerWidth - this.handleWidth();
+        } else if (offset < 0) {
+            offset = 0;
+        }
+        
+        this._handle.setStyle({left: offset + 'px'});
+        this.reposition(offset);
+    },
+    
+    drag: function(evnt) {
+        this.reposition(this._handle.node.offsetLeft);
     },
     
     handleWidth: function() {
