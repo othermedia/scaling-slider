@@ -14,10 +14,7 @@ ScalingSlider = new JS.Class('ScalingSlider', {
         
         this._slider.setYConstraint(0, 0);
         this._slider.onDrag = this.drag.bind(this);
-        
-        Ojay(window).on('resize', function(win, evnt) {
-            this.rescale();
-        }, this);
+        Ojay(window).on('resize', this.rescale, this);
         
         this._area.insert(this._container, 'before')
         ._(this._container)
