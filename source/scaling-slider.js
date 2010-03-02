@@ -38,6 +38,12 @@ ScalingSlider = new JS.Class('ScalingSlider', {
             width:    this.handleWidth() + 'px',
             left:     offsetLeft + 'px'
         });
+        
+        if (this._containerWidth - this.getLeftOffset() < this._areaWidth) {
+            this._area.setStyle({
+                left: (this._containerWidth - this._areaWidth) + 'px';
+            });
+        }
     },
     
     reposition: function(x) {
