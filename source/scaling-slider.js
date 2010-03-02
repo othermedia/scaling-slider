@@ -38,10 +38,10 @@ ScalingSlider = new JS.Class('ScalingSlider', {
         });
     },
     
-    reposition: function(relativeCentre) {
+    reposition: function(centre) {
         this._area.animate({
             left: {
-                to: -relativeCentre
+                to: -centre
             }
         }, this._animTime);
     },
