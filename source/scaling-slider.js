@@ -54,7 +54,7 @@ ScalingSlider = new JS.Class('ScalingSlider', {
         if (evnt.getTarget().node !== this._backing.node) return;
         
         var centre = evnt.clientX,
-            offset = centre - (this.handleWidth() / 2).ceil();
+            offset = centre - (this.handleWidth() / 2).floor();
         
         if (offset + this.handleWidth() > this._containerWidth) {
             offset = this._containerWidth - this.handleWidth();
