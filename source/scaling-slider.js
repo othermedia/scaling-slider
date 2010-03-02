@@ -51,7 +51,7 @@ ScalingSlider = new JS.Class('ScalingSlider', {
             handleWidth = this.handleWidth(),
             centre      = offsetLeft + (handleWidth / 2);
         
-        this.reposition((offsetLeft / this.ratio()).round());
+        this.reposition((offsetLeft / this.ratio()).ceil());
     },
     
     handleWidth: function() {
