@@ -15,6 +15,8 @@ Usage
             var slider = new ScalingSlider('#scalable-area', {
                 direction: 'horizontal'
             });
+            
+            slider.setup();
         });
     </script>
 
