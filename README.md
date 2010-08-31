@@ -4,6 +4,11 @@ ScalingSlider
 A slider control based on YUI's [Drag & Drop Utility][dd] that will scale with
 the browser window.
 
+**Please note that this is an experimental, unsupported library. We built it as
+a prototype, and not only is it not production-ready, it's actually broken.**
+Feel free, however, to modify and improve it! ScalingSlider is released under
+the BSD license.
+
 
 Usage
 -----
